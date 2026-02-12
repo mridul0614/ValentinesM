@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>For My Love ❤️</title>
+<style>
+body {
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(to bottom right, #ff9a9e, #fad0c4);
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  margin-top: 15%;
+}
+
+h1 {
+  font-size: 40px;
+  color: white;
+}
+
+button {
+  padding: 15px 30px;
+  font-size: 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin: 20px;
+  transition: 0.3s;
+}
+
+#yesBtn {
+  background-color: #ff4d6d;
+  color: white;
+}
+
+#noBtn {
+  background-color: white;
+  color: #ff4d6d;
+  position: absolute;
+}
+
+.hidden {
+  display: none;
+}
+
+.letter {
+  font-size: 24px;
+  color: white;
+  width: 70%;
+  margin: auto;
+  margin-top: 10%;
+  animation: fadeIn 3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+.heart {
+  position: fixed;
+  color: red;
+  animation: float 5s linear infinite;
+}
+
+@keyframes float {
+  from {transform: translateY(100vh);}
+  to {transform: translateY(-10vh);}
+}
+</style>
+</head>
+<body>
+
+<div class="container" id="main">
+  <h1>My Beautiful Love ❤️</h1>
+  <h2>Will you be my Valentine?</h2>
+  <button id="yesBtn">Yes 💖</button>
+  <button id="noBtn">No 😢</button>
+</div>
+
+<div class="hidden" id="loveLetter">
+  <div class="letter">
+    <h1>You Said Yes!!! 💍❤️</h1>
+    <p>
+      My love,  
+      From the moment you came into my life, everything became brighter.  
+      Your smile is my favorite sight, your laugh my favorite sound,  
+      and your love my greatest blessing.  
+      I choose you today, tomorrow, and always.  
+      Forever yours. ❤️
+    </p>
+  </div>
+</div>
+
+<script>
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const main = document.getElementById("main");
+const loveLetter = document.getElementById("loveLetter");
+
+yesBtn.addEventListener("click", () => {
+  main.classList.add("hidden");
+  loveLetter.classList.remove("hidden");
+  createHearts();
+});
+
+noBtn.addEventListener("mouseover", () => {
+  const x = Math.random() * window.innerWidth;
+  const y = Math.random() * window.innerHeight;
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+});
+
+function createHearts() {
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = Math.random() * 20 + 20 + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+      heart.remove();
+    }, 5000);
+  }, 300);
+}
+</script>
+
+</body>
+</html>
