@@ -29,18 +29,20 @@ body {
   100% { background-position: 0% 50%; }
 }
 
-/* Main Card */
+/* Glass Card */
 .card {
   backdrop-filter: blur(20px);
-  background: rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.18);
   padding: 60px 80px;
   border-radius: 30px;
   text-align: center;
-  box-shadow: 0 0 60px rgba(255,255,255,0.4);
+  box-shadow: 0 0 70px rgba(255,255,255,0.5);
   border: 1px solid rgba(255,255,255,0.4);
-  max-width: 700px;
-  animation: fadeIn 2s ease;
+  max-width: 750px;
+  animation: fadeIn 1.5s ease;
 }
+
+.hidden { display: none; }
 
 .title {
   font-family: 'Great Vibes', cursive;
@@ -49,7 +51,7 @@ body {
 }
 
 .question {
-  font-size: 38px;
+  font-size: 40px;
   font-weight: 800;
   margin-bottom: 40px;
 }
@@ -65,14 +67,14 @@ button {
   font-family: 'Playfair Display', serif;
 }
 
-#yesBtn {
+#yesBtn, #areYesBtn {
   background: white;
   color: #ff4d6d;
   font-weight: bold;
   box-shadow: 0 0 25px rgba(255,255,255,0.8);
 }
 
-#yesBtn:hover {
+#yesBtn:hover, #areYesBtn:hover {
   transform: scale(1.1);
   background: #ff4d6d;
   color: white;
@@ -83,10 +85,6 @@ button {
   border: 2px solid white;
   color: white;
   position: absolute;
-}
-
-.hidden {
-  display: none;
 }
 
 .message {
@@ -100,10 +98,19 @@ button {
   to { opacity: 1; }
 }
 
-/* Floating Hearts */
-.heart, .rose, .balloon {
+/* Wink Animation */
+.wink {
+  animation: winkPulse 1.5s infinite;
+}
+
+@keyframes winkPulse {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+/* Floating Decorations */
+.float {
   position: fixed;
-  font-size: 30px;
   animation: floatUp linear infinite;
 }
 
@@ -117,18 +124,26 @@ button {
 
 <body>
 
-<div class="card" id="main">
+<!-- PAGE 1 -->
+<div class="card" id="page1">
   <div class="title">For My Beautiful Wife ❤️</div>
   <div class="question">Will you be my Valentine?</div>
   <button id="yesBtn">Yes 💖</button>
   <button id="noBtn">No</button>
 </div>
 
-<div class="card hidden" id="loveMessage">
+<!-- PAGE 2 -->
+<div class="card hidden" id="page2">
+  <div class="question">Are you? <span class="wink">😉</span></div>
+  <button id="areYesBtn">Yes, I Am 💕</button>
+</div>
+
+<!-- PAGE 3 -->
+<div class="card hidden" id="page3">
   <div class="title">To My Beautiful Valentine ❤️</div>
   <div class="message">
-    Your presence in my life is like a blessing,  
-    you have made my life beautiful and every moment with you feels like heaven.  
+    Your presence in my life is like a blessing.  
+    You have made my life beautiful, and every moment with you feels like heaven.  
     I have never been so happy in my life before.  
     I love you so much for everything. 💕
   </div>
@@ -136,44 +151,43 @@ button {
 
 <script>
 
-const yesBtn = document.getElementById("yesBtn");
-const noBtn = document.getElementById("noBtn");
-const main = document.getElementById("main");
-const loveMessage = document.getElementById("loveMessage");
+const page1 = document.getElementById("page1");
+const page2 = document.getElementById("page2");
+const page3 = document.getElementById("page3");
 
-/* Yes Click */
-yesBtn.addEventListener("click", () => {
-  main.classList.add("hidden");
-  loveMessage.classList.remove("hidden");
-  createRomanticElements();
+document.getElementById("yesBtn").addEventListener("click", () => {
+  page1.classList.add("hidden");
+  page2.classList.remove("hidden");
 });
 
-/* Moving No Button */
-noBtn.addEventListener("mouseover", () => {
+document.getElementById("areYesBtn").addEventListener("click", () => {
+  page2.classList.add("hidden");
+  page3.classList.remove("hidden");
+});
+
+document.getElementById("noBtn").addEventListener("mouseover", () => {
   const x = Math.random() * window.innerWidth;
   const y = Math.random() * window.innerHeight;
   noBtn.style.left = x + "px";
   noBtn.style.top = y + "px";
 });
 
-/* Romantic Floating Elements */
-function createRomanticElements() {
-  setInterval(() => {
-    const items = ["❤️", "🌹", "💐", "🎈"];
-    const el = document.createElement("div");
-    el.classList.add("heart");
-    el.innerHTML = items[Math.floor(Math.random() * items.length)];
-    el.style.left = Math.random() * 100 + "vw";
-    el.style.fontSize = (Math.random() * 20 + 20) + "px";
-    el.style.animationDuration = (Math.random() * 3 + 4) + "s";
-    document.body.appendChild(el);
+/* Continuous Romantic Elements */
+setInterval(() => {
+  const items = ["❤️", "🌹", "💐", "🎈"];
+  const el = document.createElement("div");
+  el.classList.add("float");
+  el.innerHTML = items[Math.floor(Math.random() * items.length)];
+  el.style.left = Math.random() * 100 + "vw";
+  el.style.fontSize = (Math.random() * 20 + 25) + "px";
+  el.style.animationDuration = (Math.random() * 4 + 4) + "s";
+  document.body.appendChild(el);
 
-    setTimeout(() => {
-      el.remove();
-    }, 7000);
+  setTimeout(() => {
+    el.remove();
+  }, 8000);
 
-  }, 300);
-}
+}, 300);
 
 </script>
 
