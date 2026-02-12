@@ -2,10 +2,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>For My Forever ❤️</title>
+<title>For My Beautiful Wife ❤️</title>
 
-<!-- Luxury Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Great+Vibes&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=Great+Vibes&display=swap" rel="stylesheet">
 
 <style>
 
@@ -14,13 +13,13 @@ body {
   padding: 0;
   overflow: hidden;
   font-family: 'Playfair Display', serif;
-  background: linear-gradient(135deg, #4b0f19, #7b1e2b, #f3d1c3);
+  background: linear-gradient(135deg, #ff4d6d, #ff8fab, #ffffff);
   background-size: 300% 300%;
-  animation: gradientMove 15s ease infinite;
+  animation: gradientMove 12s ease infinite;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
   color: white;
 }
 
@@ -30,56 +29,58 @@ body {
   100% { background-position: 0% 50%; }
 }
 
-/* Glass Card */
+/* Main Card */
 .card {
   backdrop-filter: blur(20px);
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255,255,255,0.15);
   padding: 60px 80px;
-  border-radius: 25px;
+  border-radius: 30px;
   text-align: center;
-  box-shadow: 0 0 60px rgba(255, 215, 180, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 60px rgba(255,255,255,0.4);
+  border: 1px solid rgba(255,255,255,0.4);
   max-width: 700px;
+  animation: fadeIn 2s ease;
 }
 
-h1 {
+.title {
   font-family: 'Great Vibes', cursive;
-  font-size: 60px;
+  font-size: 55px;
   margin-bottom: 20px;
-  letter-spacing: 2px;
 }
 
-h2 {
-  font-weight: 500;
+.question {
+  font-size: 38px;
+  font-weight: 800;
   margin-bottom: 40px;
 }
 
-/* Buttons */
 button {
   padding: 15px 40px;
   font-size: 18px;
   border-radius: 40px;
   border: none;
-  margin: 10px;
+  margin: 15px;
   cursor: pointer;
   transition: 0.4s ease;
   font-family: 'Playfair Display', serif;
 }
 
 #yesBtn {
-  background: linear-gradient(45deg, #d4af37, #f8e7b0);
-  color: #4b0f19;
-  box-shadow: 0 0 20px rgba(255,215,0,0.6);
+  background: white;
+  color: #ff4d6d;
+  font-weight: bold;
+  box-shadow: 0 0 25px rgba(255,255,255,0.8);
 }
 
 #yesBtn:hover {
   transform: scale(1.1);
-  box-shadow: 0 0 40px rgba(255,215,0,0.9);
+  background: #ff4d6d;
+  color: white;
 }
 
 #noBtn {
   background: transparent;
-  border: 1px solid white;
+  border: 2px solid white;
   color: white;
   position: absolute;
 }
@@ -88,31 +89,22 @@ button {
   display: none;
 }
 
-/* Letter */
-.letter {
+.message {
   font-size: 22px;
   line-height: 1.8;
-  animation: fadeIn 2.5s ease forwards;
+  animation: fadeIn 3s ease forwards;
   opacity: 0;
-}
-
-.letter h1 {
-  font-size: 55px;
 }
 
 @keyframes fadeIn {
   to { opacity: 1; }
 }
 
-/* Golden Floating Particles */
-.particle {
+/* Floating Hearts */
+.heart, .rose, .balloon {
   position: fixed;
-  width: 8px;
-  height: 8px;
-  background: gold;
-  border-radius: 50%;
-  opacity: 0.7;
-  animation: floatUp 6s linear infinite;
+  font-size: 30px;
+  animation: floatUp linear infinite;
 }
 
 @keyframes floatUp {
@@ -126,24 +118,19 @@ button {
 <body>
 
 <div class="card" id="main">
-  <h1>My Eternal Love</h1>
-  <h2>Will you be mine, today and always?</h2>
-  <button id="yesBtn">Yes, Forever 💍</button>
+  <div class="title">For My Beautiful Wife ❤️</div>
+  <div class="question">Will you be my Valentine?</div>
+  <button id="yesBtn">Yes 💖</button>
   <button id="noBtn">No</button>
 </div>
 
-<div class="card hidden" id="loveLetter">
-  <div class="letter">
-    <h1>You Said Yes 💎❤️</h1>
-    <p>
-      My love,<br><br>
-      From the moment our souls met, the world softened and time slowed.  
-      You are the poetry in my silence, the warmth in my winter,  
-      the forever I never knew I was waiting for.<br><br>
-      I choose you in this lifetime and every lifetime after.  
-      Today, tomorrow, and endlessly.<br><br>
-      Yours — always.
-    </p>
+<div class="card hidden" id="loveMessage">
+  <div class="title">To My Beautiful Valentine ❤️</div>
+  <div class="message">
+    Your presence in my life is like a blessing,  
+    you have made my life beautiful and every moment with you feels like heaven.  
+    I have never been so happy in my life before.  
+    I love you so much for everything. 💕
   </div>
 </div>
 
@@ -152,14 +139,16 @@ button {
 const yesBtn = document.getElementById("yesBtn");
 const noBtn = document.getElementById("noBtn");
 const main = document.getElementById("main");
-const loveLetter = document.getElementById("loveLetter");
+const loveMessage = document.getElementById("loveMessage");
 
+/* Yes Click */
 yesBtn.addEventListener("click", () => {
   main.classList.add("hidden");
-  loveLetter.classList.remove("hidden");
-  createParticles();
+  loveMessage.classList.remove("hidden");
+  createRomanticElements();
 });
 
+/* Moving No Button */
 noBtn.addEventListener("mouseover", () => {
   const x = Math.random() * window.innerWidth;
   const y = Math.random() * window.innerHeight;
@@ -167,18 +156,23 @@ noBtn.addEventListener("mouseover", () => {
   noBtn.style.top = y + "px";
 });
 
-function createParticles() {
+/* Romantic Floating Elements */
+function createRomanticElements() {
   setInterval(() => {
-    const particle = document.createElement("div");
-    particle.classList.add("particle");
-    particle.style.left = Math.random() * 100 + "vw";
-    particle.style.animationDuration = (Math.random() * 3 + 3) + "s";
-    document.body.appendChild(particle);
+    const items = ["❤️", "🌹", "💐", "🎈"];
+    const el = document.createElement("div");
+    el.classList.add("heart");
+    el.innerHTML = items[Math.floor(Math.random() * items.length)];
+    el.style.left = Math.random() * 100 + "vw";
+    el.style.fontSize = (Math.random() * 20 + 20) + "px";
+    el.style.animationDuration = (Math.random() * 3 + 4) + "s";
+    document.body.appendChild(el);
 
     setTimeout(() => {
-      particle.remove();
-    }, 6000);
-  }, 200);
+      el.remove();
+    }, 7000);
+
+  }, 300);
 }
 
 </script>
