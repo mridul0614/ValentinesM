@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>For My Love</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Italiana&family=Parisienne&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Cormorant+Garamond:wght@300;400&family=Parisienne&display=swap" rel="stylesheet">
 
 <style>
 
@@ -19,91 +19,90 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: radial-gradient(circle at center, #5a0f1f 0%, #2a000c 70%);
+  background: radial-gradient(circle at center, #7a1e32 0%, #3a0614 60%, #140006 100%);
   font-family: 'Cormorant Garamond', serif;
   color: #f8e9d4;
   overflow: hidden;
 }
 
-/* Softer glow */
-body::before {
-  content: "";
+/* Soft drifting lights */
+.particle {
   position: absolute;
-  width: 700px;
-  height: 700px;
-  background: radial-gradient(circle, rgba(255,120,140,0.15), transparent 70%);
-  animation: breathe 6s ease-in-out infinite alternate;
+  width: 6px;
+  height: 6px;
+  background: rgba(255, 215, 150, 0.6);
+  border-radius: 50%;
+  animation: floatUp linear infinite;
 }
 
-@keyframes breathe {
-  from { transform: scale(1); opacity: 0.4; }
-  to { transform: scale(1.1); opacity: 0.7; }
+@keyframes floatUp {
+  from { transform: translateY(100vh); opacity: 0; }
+  20% { opacity: 0.8; }
+  to { transform: translateY(-10vh); opacity: 0; }
 }
 
+/* Card */
 .card {
   position: relative;
+  max-width: 760px;
+  padding: 90px 80px;
   text-align: center;
-  max-width: 720px;
-  padding: 80px 70px;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(18px);
-  border-radius: 20px;
-  border: 1px solid rgba(212, 175, 55, 0.2);
-  box-shadow: 0 0 50px rgba(212, 175, 55, 0.12);
-  animation: fadeUp 1.5s ease forwards;
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(20px);
+  border-radius: 25px;
+  border: 1px solid rgba(212,175,55,0.25);
+  box-shadow: 0 0 70px rgba(212,175,55,0.12);
+  animation: fadeUp 2s ease forwards;
 }
 
-.hidden {
-  display: none;
-}
+.hidden { display: none; }
 
 .title {
-  font-family: 'Italiana', serif;
-  font-size: 52px;
-  color: #e8c27a;
+  font-family: 'Playfair Display', serif;
+  font-size: 54px;
   margin-bottom: 25px;
-  letter-spacing: 1px;
+  background: linear-gradient(90deg, #f7d9a7, #e8c27a, #f7d9a7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .subtitle {
   font-size: 26px;
-  margin-bottom: 50px;
-  font-weight: 400;
+  margin-bottom: 60px;
+  font-weight: 300;
 }
 
 button {
-  padding: 14px 45px;
-  font-size: 17px;
-  border-radius: 40px;
-  border: 1px solid #d4af37;
+  padding: 15px 50px;
+  font-size: 18px;
+  border-radius: 50px;
+  border: 1px solid #e8c27a;
   background: transparent;
-  color: #e8c27a;
+  color: #f7d9a7;
   cursor: pointer;
   transition: all 0.4s ease;
-  letter-spacing: 1px;
 }
 
 button:hover {
-  background: #d4af37;
-  color: #2a000c;
-  transform: translateY(-3px);
-  box-shadow: 0 0 25px rgba(212, 175, 55, 0.5);
+  background: #e8c27a;
+  color: #3a0614;
+  transform: translateY(-4px);
+  box-shadow: 0 0 30px rgba(232,194,122,0.6);
 }
 
 .message {
-  font-size: 21px;
-  line-height: 1.8;
-  opacity: 0;
-  animation: fadeIn 3s ease forwards;
-}
-
-.signature {
-  margin-top: 50px;
-  font-family: 'Parisienne', cursive;
-  font-size: 30px;
-  color: #e8c27a;
+  font-size: 22px;
+  line-height: 1.9;
   opacity: 0;
   animation: fadeIn 4s ease forwards;
+}
+
+.final-line {
+  margin-top: 40px;
+  font-family: 'Parisienne', cursive;
+  font-size: 34px;
+  color: #f7d9a7;
+  animation: heartbeat 3s ease-in-out infinite;
 }
 
 @keyframes fadeUp {
@@ -115,6 +114,11 @@ button:hover {
   to { opacity: 1; }
 }
 
+@keyframes heartbeat {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
 </style>
 </head>
 
@@ -124,31 +128,23 @@ button:hover {
 <div class="card" id="page1">
   <div class="title">For My Beautiful Wife</div>
   <div class="subtitle">Will you be my Valentine?</div>
-  <button id="yesBtn">Only if you mean it</button>
+  <button id="yesBtn">Say Yes</button>
 </div>
 
-<!-- PAGE 2 (Tease) -->
+<!-- PAGE 2 -->
 <div class="card hidden" id="page2">
-  <div class="subtitle" style="font-size:30px; margin-bottom:40px;">
-    Hmm… are you sure? 😉
-  </div>
-  <button id="reallyBtn">I’m absolutely sure</button>
-</div>
-
-<!-- PAGE 3 (Final Message) -->
-<div class="card hidden" id="page3">
   <div class="title">My Valentine</div>
   <div class="message">
-    Your presence in my life is not merely a blessing —  
-    it is the quiet miracle that changed everything.  
+    You are the calm in my chaos,  
+    the warmth in my quietest moments.  
     <br><br>
-    With you, love feels deeper, laughter feels warmer,  
-    and even silence feels complete.  
+    With you, love feels effortless —  
+    like it was always meant to be this way.  
     <br><br>
-    I choose you — gently, intentionally, endlessly.
+    Every day with you is my favorite chapter.
   </div>
-  <div class="signature">
-    Forever yours.
+  <div class="final-line">
+    And I choose you… always.
   </div>
 </div>
 
@@ -156,17 +152,24 @@ button:hover {
 
 const page1 = document.getElementById("page1");
 const page2 = document.getElementById("page2");
-const page3 = document.getElementById("page3");
 
 document.getElementById("yesBtn").addEventListener("click", () => {
   page1.classList.add("hidden");
   page2.classList.remove("hidden");
 });
 
-document.getElementById("reallyBtn").addEventListener("click", () => {
-  page2.classList.add("hidden");
-  page3.classList.remove("hidden");
-});
+/* Soft floating light particles */
+setInterval(() => {
+  const p = document.createElement("div");
+  p.classList.add("particle");
+  p.style.left = Math.random() * 100 + "vw";
+  p.style.animationDuration = (Math.random() * 6 + 6) + "s";
+  document.body.appendChild(p);
+
+  setTimeout(() => {
+    p.remove();
+  }, 12000);
+}, 500);
 
 </script>
 
