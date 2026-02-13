@@ -8,115 +8,101 @@
 
 <style>
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+* { margin:0; padding:0; box-sizing:border-box; }
 
 body {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: radial-gradient(circle at center, #7a1e32 0%, #3a0614 60%, #140006 100%);
   font-family: 'Cormorant Garamond', serif;
+  background: radial-gradient(circle at center, #7a1e32 0%, #3a0614 60%, #140006 100%);
   color: #f8e9d4;
-  overflow: hidden;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
-/* Soft drifting lights */
-.particle {
-  position: absolute;
-  width: 6px;
-  height: 6px;
-  background: rgba(255, 215, 150, 0.6);
-  border-radius: 50%;
-  animation: floatUp linear infinite;
+section {
+  min-height: 100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:60px 30px;
 }
 
-@keyframes floatUp {
-  from { transform: translateY(100vh); opacity: 0; }
-  20% { opacity: 0.8; }
-  to { transform: translateY(-10vh); opacity: 0; }
-}
-
-/* Card */
 .card {
-  position: relative;
-  max-width: 760px;
-  padding: 90px 80px;
-  text-align: center;
-  background: rgba(255,255,255,0.06);
-  backdrop-filter: blur(20px);
-  border-radius: 25px;
-  border: 1px solid rgba(212,175,55,0.25);
-  box-shadow: 0 0 70px rgba(212,175,55,0.12);
-  animation: fadeUp 2s ease forwards;
+  max-width:750px;
+  padding:70px 60px;
+  background:rgba(255,255,255,0.06);
+  backdrop-filter:blur(18px);
+  border-radius:25px;
+  border:1px solid rgba(212,175,55,0.25);
+  box-shadow:0 0 60px rgba(212,175,55,0.12);
+  animation:fadeUp 1.8s ease forwards;
 }
 
-.hidden { display: none; }
-
-.title {
-  font-family: 'Playfair Display', serif;
-  font-size: 54px;
-  margin-bottom: 25px;
-  background: linear-gradient(90deg, #f7d9a7, #e8c27a, #f7d9a7);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+h1 {
+  font-family:'Playfair Display', serif;
+  font-size:52px;
+  margin-bottom:25px;
+  background:linear-gradient(90deg,#f7d9a7,#e8c27a,#f7d9a7);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
 }
 
-.subtitle {
-  font-size: 26px;
-  margin-bottom: 60px;
-  font-weight: 300;
+p {
+  font-size:22px;
+  line-height:1.8;
+  margin-bottom:40px;
 }
 
 button {
-  padding: 15px 50px;
-  font-size: 18px;
-  border-radius: 50px;
-  border: 1px solid #e8c27a;
-  background: transparent;
-  color: #f7d9a7;
-  cursor: pointer;
-  transition: all 0.4s ease;
+  padding:14px 45px;
+  font-size:18px;
+  border-radius:40px;
+  border:1px solid #e8c27a;
+  background:transparent;
+  color:#f7d9a7;
+  cursor:pointer;
+  transition:all .4s ease;
+  margin:10px;
 }
 
 button:hover {
-  background: #e8c27a;
-  color: #3a0614;
-  transform: translateY(-4px);
-  box-shadow: 0 0 30px rgba(232,194,122,0.6);
+  background:#e8c27a;
+  color:#3a0614;
+  transform:translateY(-3px);
+  box-shadow:0 0 25px rgba(232,194,122,0.6);
 }
 
-.message {
-  font-size: 22px;
-  line-height: 1.9;
-  opacity: 0;
-  animation: fadeIn 4s ease forwards;
-}
-
-.final-line {
-  margin-top: 40px;
-  font-family: 'Parisienne', cursive;
-  font-size: 34px;
-  color: #f7d9a7;
-  animation: heartbeat 3s ease-in-out infinite;
+.signature {
+  font-family:'Parisienne', cursive;
+  font-size:34px;
+  margin-top:40px;
+  animation:heartbeat 3s infinite;
 }
 
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(40px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeIn {
-  to { opacity: 1; }
+  from {opacity:0; transform:translateY(40px);}
+  to {opacity:1; transform:translateY(0);}
 }
 
 @keyframes heartbeat {
-  0%,100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
+  0%,100% {transform:scale(1);}
+  50% {transform:scale(1.05);}
+}
+
+/* floating soft lights */
+.particle {
+  position:fixed;
+  width:5px;
+  height:5px;
+  background:rgba(255,215,150,0.6);
+  border-radius:50%;
+  animation:floatUp linear infinite;
+}
+
+@keyframes floatUp {
+  from {transform:translateY(100vh); opacity:0;}
+  20% {opacity:.8;}
+  to {transform:translateY(-10vh); opacity:0;}
 }
 
 </style>
@@ -124,52 +110,112 @@ button:hover {
 
 <body>
 
-<!-- PAGE 1 -->
-<div class="card" id="page1">
-  <div class="title">For My Beautiful Wife</div>
-  <div class="subtitle">Will you be my Valentine?</div>
-  <button id="yesBtn">Say Yes</button>
-</div>
+<!-- SECTION 1 -->
+<section>
+  <div class="card">
+    <h1>For My Beautiful Wife</h1>
+    <p>Before I ask you something important…  
+    tell me one thing.</p>
+    <button onclick="scrollToSection(2)">Continue</button>
+  </div>
+</section>
 
-<!-- PAGE 2 -->
-<div class="card hidden" id="page2">
-  <div class="title">My Valentine</div>
-  <div class="message">
-    You are the calm in my chaos,  
-    the warmth in my quietest moments.  
-    <br><br>
-    With you, love feels effortless —  
-    like it was always meant to be this way.  
-    <br><br>
-    Every day with you is my favorite chapter.
+<!-- SECTION 2 (Playful Tease) -->
+<section id="section2">
+  <div class="card">
+    <p>Who makes your coffee better than anyone else?</p>
+    <button onclick="correctAnswer()">You do 😌</button>
+    <button onclick="wrongAnswer()">Not you</button>
   </div>
-  <div class="final-line">
-    And I choose you… always.
+</section>
+
+<!-- SECTION 3 -->
+<section id="section3" style="display:none;">
+  <div class="card">
+    <p>
+      Good answer.  
+      I was hoping you'd say that.  
+      <br><br>
+      Now tell me…  
+      who makes your life a little warmer?
+    </p>
+    <button onclick="scrollToSection(4)">You ❤️</button>
   </div>
-</div>
+</section>
+
+<!-- SECTION 4 -->
+<section id="section4" style="display:none;">
+  <div class="card">
+    <h1>My Valentine</h1>
+    <p>
+      You are the calm in my chaos,  
+      the laughter in my long days,  
+      and the warmth in every quiet night.
+      <br><br>
+      With you, everything feels intentional.
+    </p>
+    <button onclick="scrollToSection(5)">One more thing...</button>
+  </div>
+</section>
+
+<!-- SECTION 5 (Final Reveal) -->
+<section id="section5" style="display:none;">
+  <div class="card">
+    <p>
+      So now I’ll ask you properly…
+      <br><br>
+      Will you be my Valentine?
+    </p>
+    <button onclick="finalReveal()">Yes. Always.</button>
+  </div>
+</section>
+
+<!-- FINAL MESSAGE -->
+<section id="final" style="display:none;">
+  <div class="card">
+    <h1>Forever</h1>
+    <p>
+      I choose you.  
+      Not just today.  
+      Not just this year.  
+      But in every version of our future.
+    </p>
+    <div class="signature">
+      Yours, endlessly.
+    </div>
+  </div>
+</section>
 
 <script>
 
-const page1 = document.getElementById("page1");
-const page2 = document.getElementById("page2");
+function scrollToSection(num){
+  document.getElementById("section"+num).style.display="flex";
+  document.getElementById("section"+num).scrollIntoView({behavior:"smooth"});
+}
 
-document.getElementById("yesBtn").addEventListener("click", () => {
-  page1.classList.add("hidden");
-  page2.classList.remove("hidden");
-});
+function correctAnswer(){
+  alert("Correct. Obviously. 😉");
+  scrollToSection(3);
+}
 
-/* Soft floating light particles */
-setInterval(() => {
-  const p = document.createElement("div");
+function wrongAnswer(){
+  alert("Hmm… try that again 😌");
+}
+
+function finalReveal(){
+  document.getElementById("final").style.display="flex";
+  document.getElementById("final").scrollIntoView({behavior:"smooth"});
+}
+
+/* soft floating lights */
+setInterval(()=>{
+  const p=document.createElement("div");
   p.classList.add("particle");
-  p.style.left = Math.random() * 100 + "vw";
-  p.style.animationDuration = (Math.random() * 6 + 6) + "s";
+  p.style.left=Math.random()*100+"vw";
+  p.style.animationDuration=(Math.random()*6+6)+"s";
   document.body.appendChild(p);
-
-  setTimeout(() => {
-    p.remove();
-  }, 12000);
-}, 500);
+  setTimeout(()=>{p.remove()},12000);
+},500);
 
 </script>
 
